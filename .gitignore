@@ -5,4 +5,5 @@ __pycache__/
 venv/
 airflow-home/
 !airflow-home/.keep
-
+tasks/working-dir/
+!tasks/working-dir/raw/data.txt

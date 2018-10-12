@@ -14,8 +14,9 @@ def subtract_minutes(minued_date_time, subtrahend_minutes):
         prev_minutes = 60 + prev_minutes
         prev_hours -= 1
 
-    residual_date_time = '{y}-{M}-{d}-{H}-{m}'.format(y=date_time_parts[0], M=date_time_parts[1], d=date_time_parts[2],
-                                                      H=prev_hours, m=prev_minutes)
+    residual_date_time = '{y}-{M}-{d}-{H:02d}-{m:02d}'.format(y=date_time_parts[0], M=date_time_parts[1],
+                                                              d=date_time_parts[2],
+                                                              H=prev_hours, m=prev_minutes)
     return residual_date_time
 
 
@@ -36,6 +37,9 @@ if __name__ == '__main__':
 
     input_dirs = ['{dir}/{dt_prefix}'.format(dir=args['i'], dt_prefix=dt.replace('-', '/'))
                   for dt in date_time_intervals]
+
+    print('Passed date-time: {}'.format(date_time))
+    print('Input dirs: {}'.format(input_dirs))
 
     for input_dir in input_dirs:
         if not os.path.exists(input_dir):
