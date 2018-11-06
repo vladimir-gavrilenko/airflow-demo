@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 
 from airflow import DAG
@@ -7,7 +8,7 @@ from airflow.operators.python_operator import BranchPythonOperator
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2018, 10, 12, 11, 5),
+    'start_date': datetime(2018, 11, 6, 11, 5),
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
@@ -15,10 +16,10 @@ default_args = {
     'retry_delay': timedelta(minutes=2),
 }
 
-dag = DAG('preprocessor_dag', default_args=default_args, schedule_interval='*/5 * * * *')
+dag = DAG('pipeline_dag', default_args=default_args, schedule_interval='*/5 * * * *')
 
 date_time = '{{ execution_date.strftime("%Y-%m-%d-%H-%M") }}'
-project_dir = '/home/vladimir/Repos/github/airflow-demo'
+project_dir = os.environ['PROJECT_DIR']
 
 # commands
 preprocessor_command = '{project_dir}/tasks/preprocessor.sh -i {project_dir}/tasks/working-dir/raw' \
